@@ -1,1 +1,1 @@
-if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('https://landycodes.github.io/SK8M8/sw.js', { scope: 'https://landycodes.github.io/SK8M8/' })})}
+if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('/SK8M8/sw.js', { scope: '/SK8M8/' })})}

@@ -1,0 +1,159 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.trick-roulette {
+  /* margin-top: 15px; */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 100px;
+  font-size: calc(10px + 2vmin);
+}
+
+.Spin-btn {
+  padding: 21px 48px;
+  background: var(--box-color);
+  color: white;
+  font-family: inherit;
+  font-size: 27px;
+  border: none;
+  border-radius: 18px;
+
+  box-shadow: 0 9px 0 #252733, 0 9px 18px rgba(0,0,0,0.3);
+
+  cursor: pointer;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.Spin-btn:active {
+  transform: translateY(6px);
+  box-shadow: 0 3px 0 #252733, 0 6px 15px rgba(0,0,0,0.25);
+}
+
+.Trick-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Trick display box */
+.Trick-display {
+  min-width:300px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  padding: 0 20px;
+  margin-bottom: 25px;
+  border-radius: 18px;
+  /* border: 2px solid #ffffff; */
+
+
+  /* High-contrast black & white gradient for pop */
+  background: var(--box-color);
+
+  /* Strong 3D shadows to make it stand out */
+  box-shadow:
+          8px 8px 10px rgba(0, 0, 0, 0.5),
+          -8px -8px 10px rgba(255, 255, 255, 0.05),
+          inset 0 0 5px rgba(255, 255, 255, 0.03);
+
+  /* Text */
+  color: #ffffff;
+  font-family: "Inter", sans-serif;
+  text-align: center;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+
+  /* Depth for animations */
+  overflow: hidden;
+  perspective: 800px;
+  transform-style: preserve-3d;
+}
+
+.Trick-spin-wrapper {
+  display: inline-block;
+  transform-origin: center;
+  animation-fill-mode: forwards;
+  white-space: nowrap;
+  opacity: 0;
+}
+
+/* Inner wrapper that spins */
+@keyframes trickDropIn {
+  0% {
+    transform: translateY(-200%); /* start above the container */
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0); /* settle */
+    opacity: 1;
+  }
+}
+
+@keyframes trickDropOut {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(200%);
+    opacity: 0;
+  }
+}
+
+/* Apply when trick updates */
+.spin-enter {
+  animation: trickDropIn 0.2s ease-out forwards;
+}
+.spin-exit {
+  animation: trickDropOut 0.2s ease-in-out forwards;
+}
+
+/* Trick options container */
+.Trick-options {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Option label wrapper */
+.Trick-option-label {
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 18px;
+  padding: 8px 14px;
+  border-radius: 12px;
+  background: #f0f0f0; /* neutral background */
+  color: #333;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4), -2px -2px 6px rgba(255, 255, 255, 0.2);
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.Trick-option-label:hover {
+  background: #e0e0e0;
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.15), -2px -2px 8px rgba(255,255,255,0.8);
+}
+
+/* Hide the native radio input */
+.Trick-option-label input[type="radio"] {
+  display: none;
+}
+
+.Trick-option-label.checked {
+  background: var(--box-color);
+  color: white;
+  box-shadow: 0 4px 0 #252733, 0 4px 8px rgba(0,0,0,0.3);
+}

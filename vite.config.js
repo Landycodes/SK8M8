@@ -15,9 +15,12 @@ export default defineConfig({
         icons: [
           {
             src: "/icons/sk8m8-logo.png",
+            sizes: "180x180",
+            type: "image/png",
           },
         ],
       },
     }),
   ],
+  base: "/SK8M8/",
 });

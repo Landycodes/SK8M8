@@ -11,7 +11,7 @@ import TrickRoulette from './Pages/TrickRoulette'
 function App() {
     return (
         <main>
-            <Router>
+            <Router basename='/SK8M8'>
                 <Routes>
                     <Route 
                         path='/' 

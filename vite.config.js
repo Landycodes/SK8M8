@@ -9,14 +9,22 @@ export default defineConfig({
     VitePWA({
       registerType: "autoUpdate",
       injectRegister: "auto",
+      includeAssets: ["SK8M8.ico", "sk8m8-logo.png"],
       manifest: {
         name: "SK8M8",
         short_name: "SK8M8",
         icons: [
           {
-            src: "/icons/sk8m8-logo.png",
-            sizes: "180x180",
+            src: "/SK8M8/icons/sk8m8-logo.png",
+            sizes: "1024x1024",
             type: "image/png",
+            purpose: "any",
+          },
+          {
+            src: "/SK8M8/icons/sk8m8-logo.png",
+            sizes: "1024x1024",
+            type: "image/png",
+            purpose: "maskable",
           },
         ],
       },

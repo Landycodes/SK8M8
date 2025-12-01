@@ -15,6 +15,11 @@
   --light-shadow: #e0e0e0;
   --dark-shadow: #252733;
 }
+html, body {
+  height: 100%;
+  margin: 0;
+  background-color: var(--light-shadow);
+}
 
 a {
   font-weight: 500;
@@ -26,13 +31,13 @@ a:hover {
 }
 
 body {
-  background-color: var(--light-shadow);
-  margin: 0;
   display: flex;
   place-items: center;
   min-width: 320px;
-  min-height: 100vh;
+  min-height: 100%;
   overflow: hidden;
+  padding-top: env(safe-area-inset-top);
+  box-sizing: border-box;
 }
 
 h1 {

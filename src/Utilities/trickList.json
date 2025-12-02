@@ -1,70 +1,47 @@
 {
-    "Ollie": "Ollie",
-    "Spins": {
-        "HalfSpins": [
-            "FS 180",
-            "BS 180"
-        ],
-        "FullSpins": [
-            "FS 360",
-            "BS 360"
-        ]
-    },
-    "Shuvs": [
-        "FS Shuvit",
-        "BS Shuvit"
+  "Ollie": "Ollie",
+  "Spins": {
+    "HalfSpins": ["FS 180", "BS 180"],
+    "FullSpins": ["FS 360", "BS 360"]
+  },
+  "Shuvs": ["FS Shuvit", "BS Shuvit"],
+  "Flips": {
+    "EasyTricks": ["Kickflip", "Heelflip"],
+    "HardTricks": [
+      "Tre Flip",
+      "Hard Flip",
+      "Impossible",
+      "Inward Heel",
+      "Varial Flip",
+      "Varial Heel",
+      "BS Big Spin",
+      "FS Big Spin",
+      "Big Flip",
+      "Big Heel"
     ],
-    "Flips": {
-        "EasyTricks": [
-            "Kickflip", 
-            "Heelflip"
-        ],
-        "HardTricks": [
-            "Tre Flip",
-            "Hard Flip",
-            "Impossible",
-            "Inward Heel",
-            "Varial Flip",
-            "Varial Heel",
-            "BS Big Spin",
-            "FS Big Spin",
-            "Big Flip",
-            "Big Heel"
-        ],
-        "SweatyTricks": [
-            "BS Bigger Spin",
-            "FS Bigger Spin",
-            "Bigger Flip",
-            "BS 540 Shuvit",
-            "540 Flip",
-            "Dolphin Flip",
-            "FS Gazelle Spin",
-            "BS Gazelle Spin",
-            "Double Tre Flip",
-            "360 Hard Flip",
-            "360 Inward Heel",
-            "Laser Flip"
-        ]
-    },
-    "Sides": [
-        "FS",
-        "BS"
-    ],
-    "Grinds": [
-        "50-50",
-        "5-0",
-        "NoseGrind",
-        "Smith",
-        "Feeble",
-        "Crook",
-        "Salad"
-    ],
-    "Slides": [
-        "NoseSlide",
-        "TailSlide",
-        "BoardSlide",
-        "LipSlide",
-        "BluntSlide",
-        "Nose BluntSlide"
+    "SweatyTricks": [
+      "BS Bigger Spin",
+      "FS Bigger Spin",
+      "Bigger Flip",
+      "BS 540 Shuvit",
+      "540 Flip",
+      "Dolphin Flip",
+      "FS Gazelle Spin",
+      "BS Gazelle Spin",
+      "Double Tre Flip",
+      "360 Hard Flip",
+      "360 Inward Heel",
+      "Laser Flip"
     ]
+  },
+  "Sides": ["FS", "BS"],
+  "Grinds": ["50-50", "5-0", "NoseGrind", "Smith", "Feeble", "Crook", "Salad"],
+  "Slides": [
+    "NoseSlide",
+    "TailSlide",
+    "BoardSlide",
+    "LipSlide",
+    "BluntSlide",
+    "Nose BluntSlide"
+  ]
 }

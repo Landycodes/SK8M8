@@ -16,6 +16,16 @@ function TrickRoulette() {
         { label: "Sweaty", value: "sweaty", queueSize: 10 },
     ];
 
+    const vibrate = (duration = 50) => {
+      if(navigator.vibrate) {
+        console.log("vibrating")
+        navigator.vibrate(duration)
+      } else {
+        console.log("Vibrate not supported :(")
+      }
+
+    }
+
     // useEffect(() => {
     //     setPop(true);
     //     const timer = setTimeout(() => setPop(false), 200); // match CSS transition
@@ -75,7 +85,15 @@ function TrickRoulette() {
                     ))}
                 </div>
              </section>
-           <button className="Spin-btn" onClick={handleSpin}>Spin</button>
+           <button 
+           className="Spin-btn" 
+           onClick={handleSpin} 
+           onPointerDown={() => vibrate()} 
+           onPointerUp={() => vibrate()} 
+           onPointerCancel={() => vibrate(0)}
+           >
+            Spin
+            </button>
         </div>
     );
 }

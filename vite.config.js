@@ -13,6 +13,7 @@ export default defineConfig({
       injectRegister: "auto",
       includeAssets: ["SK8M8.ico", "sk8m8-logo.png"],
       manifest: {
+        display: "standalone",
         name: "SK8M8",
         short_name: "SK8M8",
         icons: [

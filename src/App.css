@@ -5,6 +5,10 @@
   margin: 0 auto;
   padding: 0;
   text-align: center;
+  padding-top: constant(safe-area-inset-top);
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
 }
 
 .trick-roulette {
@@ -64,8 +68,7 @@
   border-radius: 18px;
   /* border: 2px solid #ffffff; */
 
-  /* High-contrast black & white gradient for pop */
-  background: var(--dark-grad);
+  background: var(--box-color);
 
   /* Strong 3D shadows to make it stand out */
   box-shadow:
@@ -143,21 +146,16 @@
   font-size: 18px;
   padding: 8px 14px;
   border-radius: 12px;
-  background: #f0f0f0; /* neutral background */
-  color: #333;
-  box-shadow:
-    2px 2px 6px rgba(0, 0, 0, 0.4),
-    -2px -2px 6px rgba(255, 255, 255, 0.2);
-  transition:
-    background 0.2s ease,
-    box-shadow 0.2s ease;
+  background: var(--btn-bg-color);
+  /* color: #333; */
+  color: var(--text-color);
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4), -2px -2px 6px rgba(255, 255, 255, 0.2);
+  transition: background 0.2s ease, box-shadow 0.2s ease;
 }
 
 .Trick-option-label:hover {
-  background: #e0e0e0;
-  box-shadow:
-    2px 2px 8px rgba(0, 0, 0, 0.15),
-    -2px -2px 8px rgba(255, 255, 255, 0.8);
+  background: var(--bg-color);
+  box-shadow: 2px 2px 6px rgba(0,0,0,0.15), -2px -2px 6px rgba(255,255,255,0.8);
 }
 
 /* Hide the native radio input */
@@ -171,4 +169,18 @@
   box-shadow:
     0 4px 0 #252733,
     0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+@media (prefers-color-scheme: dark) {
+  .Trick-option-label {
+    background: var(--btn-bg-color);
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4), -2px -2px 4px rgba(255, 255, 255, 0.2);
+  }
+
+  .Trick-display {
+      box-shadow:
+          6px 6px 8px rgba(0, 0, 0, 0.5),
+          -4px -4px 6px rgba(255, 255, 255, 0.05),
+          inset 0 0 5px rgba(255, 255, 255, 0.03);
+  }
 }

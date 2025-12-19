@@ -85,10 +85,10 @@ export const strategies = {
       const ef = randomize(TL.Flips.EasyTricks);
       const ht = randomize(TL.Flips.HardTricks);
       const combos = [
-        { name: `${st} ${er} ${ef}`, weight: 2 },
+        { name: `${st} ${er} ${ef}`, weight: 3 },
         { name: `${st} ${ar} ${sh}`, weight: 1 },
         { name: `${st} ${ef}`, weight: 2 },
-        { name: `${st} ${ht}`, weight: 5 },
+        { name: `${st} ${ht}`, weight: 6 },
         { name: `${st} ${hr}`, weight: 1 },
       ];
       const newTrick = weightedRandom(combos);

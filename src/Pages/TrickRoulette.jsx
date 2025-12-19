@@ -2,29 +2,33 @@ import { useState, useEffect } from "react";
 import { TrickGenerator } from "../Utilities/trickGen";
 import { strategies } from "../Utilities/strategies";
 
+// TODO: Use modifier state to manage what grind/future options modifiers have been selected. algorithm changes when rouletteTypes is changed
+
 function TrickRoulette() {
   const [trick, setTrick] = useState("");
   const [difficulty, setDifficulty] = useState("beginner");
-  const rouletteTypes = ["Flatground", "Grinds"]
-  const [rouletteType, setRouletteType] = useState(rouletteTypes[0])
+  const [modifiers, setModifiers] = useState([])
+  const rouletteTypes = ["Flatground", "Grinds"];
+  const [rouletteType, setRouletteType] = useState(rouletteTypes[0]);
+  const [spinClass, setSpinClass] = useState(""); // '' | 'spin-exit' | 'spin-enter'
   const [generator, setGenerator] = useState(
     () => new TrickGenerator(strategies[difficulty]),
   );
-//   const [pop, setPop] = useState(false);
-  const [spinClass, setSpinClass] = useState(""); // '' | 'spin-exit' | 'spin-enter'
-
-  const options = [
-    { label: "Beginner", value: "beginner", queueSize: 3 },
-    { label: "Amateur", value: "am", queueSize: 5 },
-    { label: "Pro", value: "pro", queueSize: 10 },
-    { label: "Sweaty", value: "sweaty", queueSize: 10 },
-  ];
-
-//   useEffect(() => {
-//     setPop(true);
-//     const timer = setTimeout(() => setPop(false), 200); // match CSS transition
-//     return () => clearTimeout(timer);
-//   }, [trick]);
+  const typeOptions = {
+    Flatground: [
+      { label: "Beginner", value: "beginner", queueSize: 3 },
+      { label: "Amateur", value: "am", queueSize: 10 },
+      { label: "Pro", value: "pro", queueSize: 15 },
+      { label: "Sweaty", value: "sweaty", queueSize: 10 },
+    ],
+    Grinds: [
+      { label: "Stance", value: "stance", queueSize: 1 },
+      { label: "Flip-In", value: "flipin", queueSize: 1 },
+      { label: "Flip-Out", value: "flipout", queueSize: 1 },
+      { label: "FS/BS", value: "fsbs", queueSize: 1 },
+    ],
+  };
+  const [options, setOptions] = useState(typeOptions[rouletteType]);
 
   // useEffect(() => {
   //     const interval = setInterval(() => {
@@ -36,7 +40,6 @@ function TrickRoulette() {
 
   useEffect(() => {
     const defer = setTimeout(() => {
-        
       const queueSize = options.find(
         (opt) => opt.value === difficulty,
       )?.queueSize;
@@ -58,18 +61,24 @@ function TrickRoulette() {
   };
 
   const handleTypeChange = (direction) => {
-    const currentIndex = rouletteTypes.indexOf(rouletteType)
-    const prevIndex = currentIndex - 1
-    const nextIndex = currentIndex + 1
+    const currentIndex = rouletteTypes.indexOf(rouletteType);
+    const prevIndex = currentIndex - 1;
+    const nextIndex = currentIndex + 1;
 
-    if(direction === "left") {
-      const validIndex = rouletteTypes[prevIndex] ? prevIndex : rouletteTypes.length -1
-      setRouletteType(rouletteTypes[validIndex])
-    } else if(direction === "right"){
-      const validIndex = rouletteTypes[nextIndex] ? nextIndex : 0
-      setRouletteType(rouletteTypes[validIndex])
+    if (direction === "left") {
+      const validIndex = rouletteTypes[prevIndex]
+        ? prevIndex
+        : rouletteTypes.length - 1;
+      setRouletteType(rouletteTypes[validIndex]);
+      setOptions(typeOptions[rouletteTypes[validIndex]]);
+    } else if (direction === "right") {
+      const validIndex = rouletteTypes[nextIndex] 
+        ? nextIndex 
+        : 0;
+      setRouletteType(rouletteTypes[validIndex]);
+      setOptions(typeOptions[rouletteTypes[validIndex]]);
     }
-  }
+  };
 
   return (
     <div className="pt-7 min-h-screen flex flex-col items-center gap-20 font-[calc(10px + 2vmin)]">
@@ -77,17 +86,23 @@ function TrickRoulette() {
         <h1 className="italic font-extrabold"> SK8M8 </h1>
         <p className="text-(--text-mute)"> Trick Roulette </p>
       </section>
-<section className="w-64 flex items-center justify-between">
-  <button 
-  className="px-3 py-1 transform scale-y-125 font-extrabold text-2xl text-(--text-mute) hover:border-gray-500 transition"
-  onClick={() => handleTypeChange("left")}
-  >&lt;</button>
-  <h2 className="text-(--text-mute) font-semibold text-xl">{rouletteType}</h2>
-  <button 
-  className="px-3 py-1 transform scale-y-125 font-extrabold text-2xl text-(--text-mute) hover:border-gray-500 transition"
-  onClick={() => handleTypeChange("right")}
-  >&gt;</button>
-</section>
+      <section className="w-64 flex items-center justify-between">
+        <button
+          className="px-3 py-1 transform scale-y-125 font-extrabold text-2xl text-(--text-mute) hover:border-gray-500 transition"
+          onClick={() => handleTypeChange("left")}
+        >
+          &lt;
+        </button>
+        <h2 className="text-(--text-mute) font-semibold text-xl">
+          {rouletteType}
+        </h2>
+        <button
+          className="px-3 py-1 transform scale-y-125 font-extrabold text-2xl text-(--text-mute) hover:border-gray-500 transition"
+          onClick={() => handleTypeChange("right")}
+        >
+          &gt;
+        </button>
+      </section>
       <section className="flex flex-col items-center gap-5">
         <div className="Trick-display">
           <span className={`Trick-spin-wrapper  ${spinClass} `}>{trick}</span>

@@ -26,7 +26,8 @@
   /* --dark-shadow: #252733; */
 }
 
-html, body {
+html,
+body {
   height: 100%;
   width: 100%;
   margin: 0;
@@ -70,11 +71,10 @@ h1 {
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg-color: #14171D;
-    --gradient-text: linear-gradient(175deg, #E4E7EC, #666768);
-    --btn-bg-color: transparent;/* #1e2127; */
-    --text-color: #E4E7EC;
+    --bg-color: #14171d;
+    --gradient-text: linear-gradient(175deg, #e4e7ec, #666768);
+    --btn-bg-color: transparent; /* #1e2127; */
+    --text-color: #e4e7ec;
     --box-color: linear-gradient(145deg, #1e2127, #3b3f47);
-
   }
 }

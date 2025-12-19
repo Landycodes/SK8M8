@@ -21,32 +21,6 @@
   font-size: calc(10px + 2vmin);
 }
 
-.Spin-btn {
-  padding: 21px 48px;
-  background: var(--dark-grad);
-  color: white;
-  font-family: inherit;
-  font-size: 27px;
-  border: none;
-  border-radius: 18px;
-
-  box-shadow:
-    0 9px 0 #252733,
-    0 9px 18px rgba(0, 0, 0, 0.3);
-
-  cursor: pointer;
-  transition:
-    transform 0.1s ease,
-    box-shadow 0.1s ease;
-}
-
-.Spin-btn:active {
-  transform: translateY(6px);
-  box-shadow:
-    0 3px 0 #252733,
-    0 6px 15px rgba(0, 0, 0, 0.25);
-}
-
 /* .Trick-container {
   display: flex;
   flex-direction: column;
@@ -149,13 +123,19 @@
   background: var(--btn-bg-color);
   /* color: #333; */
   color: var(--text-color);
-  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4), -2px -2px 6px rgba(255, 255, 255, 0.2);
-  transition: background 0.2s ease, box-shadow 0.2s ease;
+  box-shadow:
+    2px 2px 6px rgba(0, 0, 0, 0.4),
+    -2px -2px 6px rgba(255, 255, 255, 0.2);
+  transition:
+    background 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .Trick-option-label:hover {
   background: var(--bg-color);
-  box-shadow: 2px 2px 6px rgba(0,0,0,0.15), -2px -2px 6px rgba(255,255,255,0.8);
+  box-shadow:
+    2px 2px 6px rgba(0, 0, 0, 0.15),
+    -2px -2px 6px rgba(255, 255, 255, 0.8);
 }
 
 /* Hide the native radio input */
@@ -164,23 +144,51 @@
 }
 
 .Trick-option-label.checked {
-  background: var(--dark-grad);
+  background: var(--box-color);
   color: white;
   box-shadow:
     0 4px 0 #252733,
     0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
+.Spin-btn {
+  padding: 21px 48px;
+  background: var(--box-color);
+  color: white;
+  font-family: inherit;
+  font-size: 27px;
+  border: none;
+  border-radius: 18px;
+
+  box-shadow:
+    0 9px 0 #252733,
+    0 9px 18px rgba(0, 0, 0, 0.3);
+
+  cursor: pointer;
+  transition:
+    transform 0.1s ease,
+    box-shadow 0.1s ease;
+}
+
+.Spin-btn:active {
+  transform: translateY(6px);
+  box-shadow:
+    0 3px 0 #252733,
+    0 6px 15px rgba(0, 0, 0, 0.25);
+}
+
 @media (prefers-color-scheme: dark) {
   .Trick-option-label {
     background: var(--btn-bg-color);
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4), -2px -2px 4px rgba(255, 255, 255, 0.2);
+    box-shadow:
+      2px 2px 4px rgba(0, 0, 0, 0.4),
+      -2px -2px 4px rgba(255, 255, 255, 0.2);
   }
 
   .Trick-display {
-      box-shadow:
-          6px 6px 8px rgba(0, 0, 0, 0.5),
-          -4px -4px 6px rgba(255, 255, 255, 0.05),
-          inset 0 0 5px rgba(255, 255, 255, 0.03);
+    box-shadow:
+      6px 6px 8px rgba(0, 0, 0, 0.5),
+      -4px -4px 6px rgba(255, 255, 255, 0.05),
+      inset 0 0 5px rgba(255, 255, 255, 0.03);
   }
 }

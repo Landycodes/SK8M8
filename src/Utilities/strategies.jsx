@@ -114,4 +114,20 @@ export const strategies = {
       return newTrick;
     },
   },
+  grinds: {
+    CreateTrick: (modifiers = new Set()) => {
+      setStanceWeights({ Regular: 0 });
+      const st = modifiers.has("stance") ? weightedRandom(stance) : ""
+      // TODO: trick in need to make sense. ie you cant do a bs 180 bs noseslide. need to seperate
+      const fi = modifiers.has("trickin") ? randomize([...TL.Flips.EasyTricks, ...TL.Shuvs, ...TL.Spins.HalfSpins]) : ""
+      const fo = modifiers.has("trickout") ? randomize([...TL.Flips.EasyTricks, ...TL.Shuvs, ...TL.Spins.HalfSpins]) : ""
+      // TODO: Make a combos rule set to stop retarded combo options
+      const co = modifiers.has("combos") ? `To ${randomize([...TL.Grinds, ...TL.Slides])}` : ""
+      const s = randomize(TL.Sides);
+      const gt = randomize([...TL.Grinds, ...TL.Slides]);
+      const newTrick = [st, fi, s, gt, co, fo].filter(Boolean).join(" ");
+      // console.log(modifiers);
+      return newTrick;
+    },
+  },
 };

@@ -35,7 +35,15 @@
     ]
   },
   "Sides": ["FS", "BS"],
-  "Grinds": ["50-50", "5-0", "NoseGrind", "Smith", "Feeble", "Crook", "Salad"],
+  "Grinds": [
+    "50-50",
+    "5 - 0",
+    "NoseGrind",
+    "Smith",
+    "Feeble",
+    "Crook",
+    "Salad"
+  ],
   "Slides": [
     "NoseSlide",
     "TailSlide",

@@ -14,11 +14,11 @@ export class TrickGenerator {
     return true;
   }
 
-  nextTrick() {
-    const newTrick = this.strategy.CreateTrick();
+  nextTrick(mods) {
+    const newTrick = this.strategy.CreateTrick(mods);
 
     if (!this.addToQueue(newTrick)) {
-      return this.nextTrick();
+      return this.nextTrick(mods);
     }
     return newTrick;
   }

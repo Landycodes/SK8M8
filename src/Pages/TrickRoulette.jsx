@@ -16,15 +16,15 @@ function TrickRoulette() {
         { label: "Sweaty", value: "sweaty", queueSize: 10 },
     ];
 
-    const vibrate = (duration = 50) => {
-      if(navigator.vibrate) {
-        console.log("vibrating")
-        navigator.vibrate(duration)
-      } else {
-        console.log("Vibrate not supported :(")
-      }
+    // const vibrate = (duration = 50) => {
+    //   if(navigator.vibrate) {
+    //     console.log("vibrating")
+    //     navigator.vibrate(duration)
+    //   } else {
+    //     console.log("Vibrate not supported :(")
+    //   }
 
-    }
+    // }
 
     // useEffect(() => {
     //     setPop(true);
@@ -64,7 +64,10 @@ function TrickRoulette() {
         <div className='trick-roulette'>
             <section>
                 <h1><i><b>SK8M8</b></i></h1>
-                <p style={{color: "#888", fontSize: ""}}><small>Trick Roulette</small></p>
+                <p style={{color: "#888", fontSize: ""}}>
+                    <small>Trick Roulette</small>
+                    <img src='src\assets\Infobox_info_icon.svg.png' style={{height: "20px", width: "auto"}}/>
+                </p>
             </section>
             <section className="Trick-container">
                 <div className="Trick-display">
@@ -88,9 +91,6 @@ function TrickRoulette() {
            <button 
            className="Spin-btn" 
            onClick={handleSpin} 
-           onPointerDown={() => vibrate()} 
-           onPointerUp={() => vibrate()} 
-           onPointerCancel={() => vibrate(0)}
            >
             Spin
             </button>

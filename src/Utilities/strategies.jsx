@@ -115,18 +115,27 @@ export const strategies = {
     },
   },
   grinds: {
+    // NEEDS FURTHER TESTING AND DIALING IN
     CreateTrick: (modifiers = new Set()) => {
       setStanceWeights({ Regular: 0 });
+      const si = randomize(TL.Sides)
+      const gr = randomize(TL.Grinds)
+      const sl = randomize(TL.Slides)
       const st = modifiers.has("stance") ? weightedRandom(stance) : ""
-      // TODO: trick in need to make sense. ie you cant do a bs 180 bs noseslide. need to seperate
-      const fi = modifiers.has("trickin") ? randomize([...TL.Flips.EasyTricks, ...TL.Shuvs, ...TL.Spins.HalfSpins]) : ""
-      const fo = modifiers.has("trickout") ? randomize([...TL.Flips.EasyTricks, ...TL.Shuvs, ...TL.Spins.HalfSpins]) : ""
-      // TODO: Make a combos rule set to stop retarded combo options
-      const co = modifiers.has("combos") ? `To ${randomize([...TL.Grinds, ...TL.Slides])}` : ""
-      const s = randomize(TL.Sides);
-      const gt = randomize([...TL.Grinds, ...TL.Slides]);
-      const newTrick = [st, fi, s, gt, co, fo].filter(Boolean).join(" ");
-      // console.log(modifiers);
+      const gti = modifiers.has("trickin") ? randomize([...TL.Flips.EasyTricks, ...TL.Shuvs, ...TL.Spins.HalfSpins]) : ""
+      const gto = modifiers.has("trickout") ? randomize([...TL.Flips.EasyTricks, ...TL.Shuvs, ...TL.Spins.HalfSpins]) : ""
+      const sti = modifiers.has("trickin") ? randomize([...TL.Flips.EasyTricks, "Bigspin"]) : "" 
+      const sto = modifiers.has("trickout") ? randomize([...TL.Flips.EasyTricks, ...TL.Shuvs, "FS 270", "BS 270", "FS Bigspin", "BS Bigspin"]) : ""
+      const co = modifiers.has("combos") ? `To ${randomize([...TL.Grinds.filter((t)=> t != gr), ...TL.Slides.filter((t)=> t != sl)])}` : ""
+      
+      const combos = [
+        {name: `${st} ${gti} ${si} ${gr} ${co} ${gto}`, weight: 1 },
+        {name: `${st} ${si} ${sti} ${sl} ${co} ${sto}`, weight: 1 },
+        
+      ]
+
+      const newTrick = weightedRandom(combos)
+
       return newTrick;
     },
   },

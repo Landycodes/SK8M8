@@ -1,27 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { TrickGenerator } from "../Utilities/trickGen";
 import { strategies } from "../Utilities/strategies";
 
-// TODO: Use modifier state to manage what grind/future options modifiers have been selected. algorithm changes when rouletteTypes is changed
-
-function TrickRoulette() {
-  const [trick, setTrick] = useState("");
-  const [difficulty, setDifficulty] = useState("beginner");
-  const [modifiers, setModifiers] = useState(() => new Set());
-  const rouletteTypes = ["Flatground", "Grinds"];
-  const [rouletteType, setRouletteType] = useState(rouletteTypes[0]);
-  const [spinClass, setSpinClass] = useState(""); // '' | 'spin-exit' | 'spin-enter'
-  const rouletteStrategies = {
-    Flatground: strategies[difficulty],
-    Grinds: strategies["grinds"],
-  };
-  const [generator, setGenerator] = useState(
-    () =>
-      new TrickGenerator(
-        rouletteStrategies[rouletteType] /* strategies[difficulty] */,
-      ),
-  );
-  const typeOptions = {
+const rouletteTypes = ["Flatground", "Grinds"];
+const typeOptions = {
     Flatground: [
       { label: "Beginner", value: "beginner", queueSize: 3 },
       { label: "Amateur", value: "am", queueSize: 10 },
@@ -35,33 +17,36 @@ function TrickRoulette() {
       { label: "Combos", value: "combos" },
     ],
   };
-  const [options, setOptions] = useState(typeOptions[rouletteType]);
 
-  // useEffect(() => {
-  //     const interval = setInterval(() => {
-  //         setTrick(strategies[difficulty].CreateTrick())
-  //     }, 2000); // 2000ms = 2 seconds
-  //
-  //     return () => clearInterval(interval); // cleanup on unmount
-  // }, [difficulty, trick]);
+function TrickRoulette() {
+  const [trick, setTrick] = useState("");
+  const [rouletteType, setRouletteType] = useState(rouletteTypes[0]);
+  const [difficulty, setDifficulty] = useState("beginner");
+  const [modifiers, setModifiers] = useState(() => new Set());
+  const [spinClass, setSpinClass] = useState(""); // '' | 'spin-exit' | 'spin-enter'
+  const options = typeOptions[rouletteType]
+  const genRef = useRef(null)
+
+  const rouletteStrategies = {
+    Flatground: strategies[difficulty],
+    Grinds: strategies.grinds,
+  };
 
   useEffect(() => {
-    const defer = setTimeout(() => {
-      const queueSize = options.find(
-        (opt) => opt.value === difficulty,
-      )?.queueSize;
+    genRef.current = new TrickGenerator(
+        rouletteStrategies[rouletteType],
+        options.find((opt) => opt.value === difficulty)?.queueSize
+    )
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [rouletteType, difficulty])
 
-      setGenerator(new TrickGenerator(strategies[difficulty], queueSize));
-    }, 0);
-
-    return () => clearTimeout(defer);
-  }, [difficulty]);
 
   const handleSpin = () => {
     setSpinClass("spin-exit");
 
     setTimeout(() => {
-      const trick = generator.nextTrick(modifiers);
+      if(!genRef.current) return
+      const trick = genRef.current.nextTrick(modifiers);
       setTrick(trick);
       setSpinClass("spin-enter");
     }, 400);
@@ -71,22 +56,25 @@ function TrickRoulette() {
     const currentIndex = rouletteTypes.indexOf(rouletteType);
     const prevIndex = currentIndex - 1;
     const nextIndex = currentIndex + 1;
+    let rouletteVal;
 
     if (direction === "left") {
       const validIndex = rouletteTypes[prevIndex]
         ? prevIndex
         : rouletteTypes.length - 1;
-      const rv = rouletteTypes[validIndex];
-      setRouletteType(rv);
-      setOptions(typeOptions[rv]);
-      setGenerator(new TrickGenerator(rouletteStrategies[rv]));
+      rouletteVal = rouletteTypes[validIndex];
     } else if (direction === "right") {
-      const validIndex = rouletteTypes[nextIndex] ? nextIndex : 0;
-      const rv = rouletteTypes[validIndex];
-      setRouletteType(rv);
-      setOptions(typeOptions[rv]);
-      setGenerator(new TrickGenerator(rouletteStrategies[rv]));
+      const validIndex = rouletteTypes[nextIndex] 
+      ? nextIndex 
+      : 0;
+      rouletteVal = rouletteTypes[validIndex];
     }
+
+    if(!rouletteVal) return
+
+    setRouletteType(rouletteVal);
+    setTrick("")
+    setModifiers(new Set())
   };
 
   const flatgroundOptions = (option) => {
@@ -125,7 +113,6 @@ function TrickRoulette() {
               updated.has(e.target.value)
                 ? updated.delete(e.target.value)
                 : updated.add(e.target.value);
-                console.log(updated)
 
               return updated;
             });

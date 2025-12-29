@@ -1,5 +1,5 @@
 export class TrickGenerator {
-  constructor(strategy, queueSize = 5) {
+  constructor(strategy, queueSize = 10) {
     this.strategy = strategy;
     this.queueSize = queueSize;
     this.queue = [];
@@ -11,6 +11,7 @@ export class TrickGenerator {
     this.queue.unshift(trick);
 
     if (this.queue.length > this.queueSize) this.queue.pop();
+    // console.log(this.queue, "max: ", this.queueSize)
     return true;
   }
 

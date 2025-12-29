@@ -6,8 +6,8 @@ function TrickRoulette() {
     const [trick, setTrick] = useState("");
     const [difficulty, setDifficulty] = useState("beginner");
     const [generator, setGenerator] = useState(() => new TrickGenerator(strategies[difficulty]))
-    // const [pop, setPop] = useState(false);
     const [spinClass, setSpinClass] = useState(""); // '' | 'spin-exit' | 'spin-enter'
+    const [modulOpen, setModulOpen] = useState(false)
 
     const options = [
         { label: "Beginner", value: "beginner", queueSize: 3 },
@@ -16,29 +16,6 @@ function TrickRoulette() {
         { label: "Sweaty", value: "sweaty", queueSize: 10 },
     ];
 
-    // const vibrate = (duration = 50) => {
-    //   if(navigator.vibrate) {
-    //     console.log("vibrating")
-    //     navigator.vibrate(duration)
-    //   } else {
-    //     console.log("Vibrate not supported :(")
-    //   }
-
-    // }
-
-    // useEffect(() => {
-    //     setPop(true);
-    //     const timer = setTimeout(() => setPop(false), 200); // match CSS transition
-    //     return () => clearTimeout(timer);
-    // }, [trick]);
-
-    // useEffect(() => {
-    //     const interval = setInterval(() => {
-    //         setTrick(strategies[difficulty].CreateTrick())
-    //     }, 2000); // 2000ms = 2 seconds
-    //
-    //     return () => clearInterval(interval); // cleanup on unmount
-    // }, [difficulty, trick]);
 
     useEffect(() => {
         const defer = setTimeout(() => {
@@ -59,16 +36,48 @@ function TrickRoulette() {
         }, 400)
     };
 
+    const handleModul = () => {
+        return (
+            <div className="dialog-box">
+                <button onClick={() => setModulOpen(false)}>X</button>
+                <h3>How To Play</h3>
+                <ul>
+                    <li style={{textAlign: "start"}}>
+                        <b>1 Player</b> 
+                        <p>
+                        Select a difficulty setting that suits you and tap spin for a trick to try. 
+                        Flatground, down a gap, off a ramp, go nuts! 
+                        Just dont sue me if you go making a fool of yourself trying to jeffwonSong it down a 10 stair.                            
+                        </p>
+                    </li>
+                    <li style={{textAlign: "start"}}> 
+                        <b>2+ Players</b> 
+                        <p>
+                        This is a survival game. All players choose a difficulty. 
+                        Someone spins for a trick, and everyone must attempt it. Miss the trick, get a letter. 
+                        Collect all letters (S-K-A-T-E) and you're out. Last player standing wins. Players can skip a spin if everyone agrees. 
+                        The final letter gets two attempts.
+                        </p>
+                    </li>
+                </ul>
+            </div>
+        )
+    }
+
 
     return (
         <div className='trick-roulette'>
             <section>
                 <h1><i><b>SK8M8</b></i></h1>
+                <span style={{display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center"}}>
                 <p style={{color: "#888", fontSize: ""}}>
                     <small>Trick Roulette</small>
-                    <img src='src\assets\Infobox_info_icon.svg.png' style={{height: "20px", width: "auto"}}/>
+                    &nbsp;
                 </p>
+                <img src='src\assets\Infobox_info_icon.svg.png' alt='info' onClick={() => setModulOpen(true)} style={{height: "22px", width: "auto"}}/>                    
+                </span>
             </section>
+            {modulOpen ? handleModul() : ""}
             <section className="Trick-container">
                 <div className="Trick-display">
                     <span className={`Trick-spin-wrapper  ${spinClass} `}>{trick}</span>

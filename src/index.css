@@ -53,6 +53,11 @@ h1 {
   color: var(--dark-shadow);
 }
 
+ul {
+  padding: 5px;
+  list-style: none;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

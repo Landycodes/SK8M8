@@ -162,6 +162,78 @@
   box-shadow: 0 4px 0 #252733, 0 4px 8px rgba(0,0,0,0.3);
 }
 
+.dialog-box {
+  z-index: 100;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  max-width: 500px;
+  height: 70%;
+  padding: 15px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(145deg, #3c3c3c, #5c5c5c);  border: 3px solid #7c7c7c;
+  color: #f5f5f5;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.dialog-box::-webkit-scrollbar {
+  display: none;
+}
+
+.dialog-box h3 {
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+  color: #f0f0f0;
+  text-align: center;
+}
+
+.dialog-box ul {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.dialog-box li {
+  margin-bottom: 25px;
+  color: #f0f0f0;
+}
+
+.dialog-box li b {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 1.1rem;
+}
+
+.dialog-box p {
+    max-width: 100%;
+    line-height: 1.6;
+    font-size: 1.1rem; 
+    text-align: left;
+}
+
+.dialog-box > button {
+  align-self: flex-end;
+  margin-bottom: 10px;
+  background-color: #8c8c8c;
+  border: none;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
 @media (prefers-color-scheme: dark) {
   .Trick-option-label {
     background: var(--btn-bg-color);

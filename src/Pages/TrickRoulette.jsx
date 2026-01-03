@@ -74,7 +74,7 @@ function TrickRoulette() {
                     <small>Trick Roulette</small>
                     &nbsp;
                 </p>
-                <img src='src\assets\Infobox_info_icon.svg.png' alt='info' onClick={() => setModulOpen(true)} style={{height: "22px", width: "auto"}}/>                    
+                <img className="info-btn" src='src\assets\Infobox_info_icon.svg.png' alt='info' onClick={() => setModulOpen(true)} style={{height: "22px", width: "auto"}}/>                    
                 </span>
             </section>
             {modulOpen ? handleModul() : ""}

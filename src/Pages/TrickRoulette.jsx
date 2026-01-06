@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { TrickGenerator } from '../Utilities/trickGen';
 import { strategies } from '../Utilities/strategies';
+import infoIcon from "../assets/infobox_info_icon.png"
 
 function TrickRoulette() {
     const [trick, setTrick] = useState("");
@@ -60,6 +61,24 @@ function TrickRoulette() {
                         </p>
                     </li>
                 </ul>
+                <h3>Install Me</h3>
+                <ol>
+                    <li>
+                        <p>
+                            Tap the 3 dots
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Tap share <small>[ If you're using an iphone ]</small>
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Select "Add to Home Screen"
+                        </p>
+                    </li>
+                </ol>
             </div>
         )
     }
@@ -74,7 +93,7 @@ function TrickRoulette() {
                     <small>Trick Roulette</small>
                     &nbsp;
                 </p>
-                <img className="info-btn" src='src\assets\Infobox_info_icon.svg.png' alt='info' onClick={() => setModulOpen(true)} style={{height: "22px", width: "auto"}}/>                    
+                <img className="info-btn" src={infoIcon} alt='info' onClick={() => setModulOpen(true)} style={{height: "22px", width: "auto"}}/>
                 </span>
             </section>
             {modulOpen ? handleModul() : ""}

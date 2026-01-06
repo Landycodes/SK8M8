@@ -170,12 +170,18 @@
 
 @keyframes popup {
   0% {
-    transform: translate(-50%, calc(-50% + 200%));
-    width: 50px;
+    transform: 
+      translate(-50%, calc(-50% + 200%))
+      scaleX(0.1);
+      opacity: 0;
+    /* width: 50px; */
   }
   100% {
-    transform: translate(-50%, -50%);
-    width: 80%;
+    transform: 
+      translate(-50%, -50%)
+      scaleX(1);
+      opacity: 1;
+    /* width: 80%; */
   }
 }
 
@@ -223,6 +229,7 @@
 
 .dialog-box li {
   margin-bottom: 25px;
+  /* width: 312px; */
   /* color: #f0f0f0; */
 }
 

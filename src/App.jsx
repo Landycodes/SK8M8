@@ -6,6 +6,7 @@ import {
     Navigate 
     } from 'react-router-dom'
 import TrickRoulette from './Pages/TrickRoulette'
+import Footer from './Pages/components/Footer'
 
 
 function App() {
@@ -15,7 +16,12 @@ function App() {
                 <Routes>
                     <Route 
                         path='/' 
-                        element={<TrickRoulette />}
+                        element={
+                        <>
+                            <TrickRoulette />
+                            <Footer />    
+                        </>
+                    }
                     />
                 </Routes>
             </Router>

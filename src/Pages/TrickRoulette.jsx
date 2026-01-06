@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { TrickGenerator } from '../Utilities/trickGen';
-import { strategies } from '../Utilities/strategies';
+import { TrickGenerator } from '../Utilities/trickGen.js';
+import { strategies } from '../Utilities/strategies.js';
 import infoIcon from "../assets/infobox_info_icon.png"
 
 function TrickRoulette() {

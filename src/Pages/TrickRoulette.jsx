@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
-import { TrickGenerator } from "../Utilities/trickGen";
-import { strategies } from "../Utilities/strategies";
+import { TrickGenerator } from "../Utilities/trickGen.js";
+import { strategies } from "../Utilities/strategies.js";
+import infoIcon from "../assets/infobox_info_icon.png"
 
 const rouletteTypes = ["Flatground", "Grinds"];
 const typeOptions = {
@@ -24,6 +25,7 @@ function TrickRoulette() {
   const [difficulty, setDifficulty] = useState("beginner");
   const [modifiers, setModifiers] = useState(() => new Set());
   const [spinClass, setSpinClass] = useState(""); // '' | 'spin-exit' | 'spin-enter'
+  const [modulOpen, setModulOpen] = useState(false)
   const options = typeOptions[rouletteType]
   const genRef = useRef(null)
 
@@ -52,7 +54,7 @@ function TrickRoulette() {
     }, 400);
   };
 
-  const handleTypeChange = (direction) => {
+    const handleTypeChange = (direction) => {
     const currentIndex = rouletteTypes.indexOf(rouletteType);
     const prevIndex = currentIndex - 1;
     const nextIndex = currentIndex + 1;
@@ -77,7 +79,53 @@ function TrickRoulette() {
     setModifiers(new Set())
   };
 
-  const flatgroundOptions = (option) => {
+  const handleModul = () => {
+        return (
+            <div className="dialog-box">
+                <button onClick={() => setModulOpen(false)}>X</button>
+                <h3>How To Play</h3>
+                <ul>
+                    <li style={{textAlign: "start"}}>
+                        <b>1 Player</b> 
+                        <p>
+                        Select a difficulty setting that suits you and tap spin for a trick to try. 
+                        Flatground, down a gap, off a ramp, go nuts! 
+                        Just dont sue me if you go making a fool of yourself trying to jeffwonSong it down a 10 stair.                            
+                        </p>
+                    </li>
+                    <li style={{textAlign: "start"}}> 
+                        <b>2+ Players</b> 
+                        <p>
+                        This is a survival game. All players choose a difficulty. 
+                        Someone spins for a trick, and everyone must attempt it. Miss the trick, get a letter. 
+                        Collect all letters (S-K-A-T-E) and you're out. Last player standing wins. Players can skip a spin if everyone agrees. 
+                        The final letter gets two attempts.
+                        </p>
+                    </li>
+                </ul>
+                <h3>Install Me</h3>
+                <ol>
+                    <li>
+                        <p>
+                            Tap the 3 dots
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Tap share <small>[ If you're using an iphone ]</small>
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Select "Add to Home Screen"
+                        </p>
+                    </li>
+                </ol>
+            </div>
+        )
+    }
+
+    const flatgroundOptions = (option) => {
     return (
       <label
         key={option.value}
@@ -124,12 +172,20 @@ function TrickRoulette() {
     );
   };
 
-  return (
+   return (
     <div className="pt-7 min-h-screen flex flex-col items-center gap-20 font-[calc(10px + 2vmin)]">
       <section className="h-24 text-center flex flex-col justify-between">
         <h1 className="italic font-extrabold"> SK8M8 </h1>
-        <p className="text-(--text-mute)"> Trick Roulette </p>
+
+                <span style={{display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center"}}>
+                          <p className="text-(--text-mute)"> Trick Roulette </p>
+
+                <img className="info-btn" src={infoIcon} alt='info' onClick={() => setModulOpen(true)} style={{height: "22px", width: "auto"}}/>
+                </span>
+
       </section>
+      {modulOpen ? handleModul() : ""}
+
       <section className="w-60 flex items-center justify-between">
         <button
           className="px-3 py-1 transform scale-y-125 font-extrabold text-2xl text-(--text-mute) hover:border-gray-500 transition"

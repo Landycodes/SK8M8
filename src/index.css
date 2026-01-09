@@ -23,8 +23,8 @@
   --text-color: #333;
   --gradient-text: linear-gradient(175deg, #212630, #535353);
   --btn-bg-color: #f0f0f0;
-  --dialog-color: linear-gradient(  145deg,#f2f2f2,#d6d6d6);
-  /* --dark-shadow: #252733; */
+  --dialog-color: linear-gradient(145deg, #f2f2f2, #d6d6d6);
+  --text-mute: #888 /* --dark-shadow: #252733; */;
 }
 
 html,
@@ -68,15 +68,6 @@ h1 {
   color: var(--dark-shadow);
 }
 
-h5,p {
-  margin: 0;
-}
-
-ul {
-  padding: 5px;
-  list-style: none;
-}
-
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
@@ -98,6 +89,5 @@ ul {
     --text-color: #e4e7ec;
     --box-color: linear-gradient(145deg, #1e2127, #3b3f47);
     --dialog-color: linear-gradient(145deg, #1a1f28, #2a313f);
-
   }
 }

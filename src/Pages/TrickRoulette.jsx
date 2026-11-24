@@ -1,18 +1,25 @@
 import { useState, useEffect, useRef } from "react";
-import { TrickGenerator } from "../Utilities/trickGen.js";
-import { strategies } from "../Utilities/strategies.js";
+import { TrickGenerator } from "../Generator/trickGen.js";
+// import { strategies } from "../Utilities/strategies.js";
+import { flatgroundStrat } from "../Strategies/flatgroundStrat.js"
+import { grindStrat } from "../Strategies/grindStrat.js"
 import infoIcon from "../assets/infobox_info_icon.png";
 import InfoModal from "./components/InfoModal.jsx";
 
-const rouletteTypes = ["Flatground", "Grinds"];
+// const rouletteTypes = ["Flatground", "Grinds"];
+const rouletteTypes = [
+  {id: "flatground", label: "Flatground"},
+  {id: "grinds", label: "Grinds / Slides"}
+];
+
 const typeOptions = {
-  Flatground: [
+  flatground: [
     { label: "Beginner", value: "beginner", queueSize: 3 },
     { label: "Amateur", value: "am", queueSize: 10 },
     { label: "Pro", value: "pro", queueSize: 15 },
     { label: "Sweaty", value: "sweaty", queueSize: 10 },
   ],
-  Grinds: [
+  grinds: [
     { label: "Stance", value: "stance" },
     { label: "Trick-In", value: "trickin" },
     { label: "Trick-Out", value: "trickout" },
@@ -27,54 +34,42 @@ function TrickRoulette() {
   const [modifiers, setModifiers] = useState(() => new Set());
   const [spinClass, setSpinClass] = useState(""); // '' | 'spin-exit' | 'spin-enter'
   const [modalOpen, setModalOpen] = useState(false);
-  const options = typeOptions[rouletteType];
+  const options = typeOptions[rouletteType.id];
   const genRef = useRef(null);
 
   const rouletteStrategies = {
-    Flatground: strategies[difficulty],
-    Grinds: strategies.grinds,
+    flatground: flatgroundStrat[difficulty],
+    grinds: grindStrat,
   };
 
   useEffect(() => {
     genRef.current = new TrickGenerator(
-      rouletteStrategies[rouletteType],
+      rouletteStrategies[rouletteType.id],
       options.find((opt) => opt.value === difficulty)?.queueSize,
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [rouletteType, difficulty]);
+  }, [rouletteType.id, difficulty]);
 
-  const handleSpin = () => {
-    setSpinClass("spin-exit");
+  const summonTrick = () => {
+    setSpinClass("spin-exit"); //CSS animation
 
     setTimeout(() => {
       if (!genRef.current) return;
       const trick = genRef.current.nextTrick(modifiers);
       setTrick(trick);
-      setSpinClass("spin-enter");
+
+      setSpinClass("spin-enter"); //CSS animation
     }, 400);
   };
 
   const handleTypeChange = (direction) => {
-    const currentIndex = rouletteTypes.indexOf(rouletteType);
-    const prevIndex = currentIndex - 1;
-    const nextIndex = currentIndex + 1;
-    let rouletteVal;
+    const currentIndex = rouletteTypes.findIndex((t) => t.id === rouletteType.id);
+    const step = direction === "left" ? -1 : 1
+    const next = (currentIndex + step + rouletteTypes.length) % rouletteTypes.length
 
-    if (direction === "left") {
-      const validIndex = rouletteTypes[prevIndex]
-        ? prevIndex
-        : rouletteTypes.length - 1;
-      rouletteVal = rouletteTypes[validIndex];
-    } else if (direction === "right") {
-      const validIndex = rouletteTypes[nextIndex] ? nextIndex : 0;
-      rouletteVal = rouletteTypes[validIndex];
-    }
-
-    if (!rouletteVal) return;
-
-    setRouletteType(rouletteVal);
-    setTrick("");
+    setRouletteType(rouletteTypes[next])
     setModifiers(new Set());
+    setTrick("");
   };
 
   const flatgroundOptions = (option) => {
@@ -153,7 +148,7 @@ function TrickRoulette() {
           &lt;
         </button>
         <h2 className="text-(--text-mute) font-semibold text-xl">
-          {rouletteType}
+          {rouletteType.label}
         </h2>
         <button
           className="px-3 py-1 transform scale-y-125 font-extrabold text-2xl text-(--text-mute) hover:border-gray-500 transition"
@@ -168,18 +163,18 @@ function TrickRoulette() {
         </div>
         <div className="m-0 flex justify-around items-center w-screen max-w-[400px]">
           {options.map((opt) => {
-            switch (rouletteType) {
-              case "Flatground":
+            switch (rouletteType.id) {
+              case "flatground":
                 return flatgroundOptions(opt);
-              case "Grinds":
+              case "grinds":
                 return grindOptions(opt);
               default:
-                "";
+                return null;
             }
           })}
         </div>
       </section>
-      <button className="Spin-btn" onClick={handleSpin}>
+      <button className="Spin-btn" onClick={summonTrick}>
         Spin
       </button>
     </div>
